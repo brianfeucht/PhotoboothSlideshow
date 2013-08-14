@@ -27,9 +27,6 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            //Set up the window to be full screen
-            this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             pictureBox1.Size = new Size(this.Width, this.Height);
 
             // Load all the pictures
@@ -88,8 +85,13 @@ namespace WindowsFormsApplication1
             {
                 if (ImagesHashSet.Add(file))
                 {
-                    PhotoList.Add(Image.FromFile(file));
+                    try
+                    {
+                        PhotoList.Add(Image.FromFile(file));
+                    }
+                    catch { }
                 }
+
             }            
         }
 
@@ -107,6 +109,13 @@ namespace WindowsFormsApplication1
                 Rotate.Interval = NewPhotoRotateInterval;
                 Rotate.Start();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Hide();
+            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         }
     }
 }
